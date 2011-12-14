@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <!-- <1> -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_height="wrap_content" android:orientation="vertical"
+  android:layout_width="fill_parent">
+
+  <!-- <2> -->
+  <LinearLayout android:layout_height="wrap_content"
+    android:layout_width="fill_parent">
+
+    <!-- <3> -->
+    <TextView android:layout_height="wrap_content"
+      android:layout_width="fill_parent" android:layout_weight="1"
+      android:id="@+id/textCity" android:text="City"
+      android:textStyle="bold" />
+
+    <!-- <4> -->
+    <TextView android:layout_height="wrap_content"
+      android:layout_width="fill_parent" android:layout_weight="1"
+      android:gravity="right" android:id="@+id/textSource"
+      android:text="forecast source" />
+  </LinearLayout>
+
+  <!-- <5> -->
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:stretchColumns="1">
+	<TableRow>
+    
+		  <TextView
+		      android:id="@+id/textDate"
+		      android:padding="3dp"
+		      android:layout_height="wrap_content"
+		      android:text="date" />
+		
+		  <TextView
+		      android:id="@+id/textTime"
+		      android:padding="3dp"
+		      android:layout_height="wrap_content"
+		      android:gravity="right"
+		      android:text="time" />
+	</TableRow>
+	<TableRow >
+	    <ImageView
+		    android:id="@+id/imageForecast"
+		    android:gravity="center"
+		    android:src="@drawable/sunny" />
+	    <TextView 
+	        android:layout_height="fill_parent"
+    		android:id="@+id/textForecast"
+    		android:padding="3dp"
+    		android:gravity="center"
+    		android:text="actual forecast" />
+	</TableRow>
+</TableLayout>
+
+    <TextView
+        android:id="@+id/textExtended"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="more info..."/>
+</LinearLayout>

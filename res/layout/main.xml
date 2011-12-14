@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="@string/titleMain"
+        android:gravity="center" />
+    
+    <!--<TextView
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:id="@+id/textForecast"
+        android:background="#6000" />-->
+    
+    <ListView android:layout_height="fill_parent"
+    android:layout_width="fill_parent" android:id="@+id/listForecast"
+    android:background="#6000" />
+
+</LinearLayout>
