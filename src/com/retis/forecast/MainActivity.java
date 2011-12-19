@@ -1,16 +1,18 @@
 package com.retis.forecast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.retis.forecast.ForecastAdapter;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ListAdapter;
+import android.os.Handler;
 import android.widget.ListView;
+
 
 public class MainActivity extends Activity {
 	ListView listForecast;
@@ -57,7 +59,7 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
+        StartTask();
         listForecast = (ListView) findViewById(R.id.listForecast);
         
         dbHelper = new DbHelper(this);
@@ -68,7 +70,6 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		
 		db.close();
 	}
 
@@ -79,17 +80,6 @@ public class MainActivity extends Activity {
 		cursor = db.query(DbHelper.TABLE, null, null,
 				null, null, null, DbHelper.C_DATE + " DESC");
 		startManagingCursor(cursor);
-		
-		/*String city, forecast, date, time;
-		while (cursor.moveToNext()) {
-			city = cursor.getString(cursor.getColumnIndex(DbHelper.C_CITY));
-			forecast = cursor.getString(cursor.getColumnIndex(DbHelper.C_FORECAST));
-			date = cursor.getString(cursor.getColumnIndex(DbHelper.C_DATE));
-			time = cursor.getString(cursor.getColumnIndex(DbHelper.C_TIME));
-			String output = String.format("%s [%s %s]: %s\n", city, date, time, forecast);
-			textForecast.append(output);
-		}*/
-		
 		// Create the adapter
 	    adapter = new ForecastAdapter(this, cursor);
 	    listener = new ForecastListener(this);
@@ -98,8 +88,26 @@ public class MainActivity extends Activity {
 		
 	}
 	
-	public void StartService1(View view){
-		
-			
+	public void StartTask(){
+		TimerTask doAsynchronousTask;
+		final Handler handler = new Handler();
+		Timer timer = new Timer();
+		doAsynchronousTask = new TimerTask() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				handler.post(new Runnable() {
+					public void run() {
+						try {
+							/* PerformBackgroundTask performBackgroundTask = new PerformBackgroundTask();
+							 * PerformBackgroundTask this class is the class that extends AsynchTask 
+							 * performBackgroundTask.execute();*/
+						} catch (Exception e) {}
+					}
+				});
+			}
+		};
+		/**/
+		timer.schedule(doAsynchronousTask, 0,3600000);//execute in every 50000 ms
 	}
 }
