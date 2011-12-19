@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -97,5 +98,8 @@ public class MainActivity extends Activity {
 		
 	}
 	
-	
+	public void StartService1(View view){
+		
+			
+	}
 }

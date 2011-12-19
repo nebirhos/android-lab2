@@ -10,6 +10,11 @@
         android:textSize="30dp"
         android:text="@string/titleMain"
         android:gravity="center" />
+    <Button
+     android:layout_height="wrap_content"
+     android:layout_width="wrap_content"
+     android:text="@string/StartService"
+     android:onClick="StartService1" />
     
     <!--<TextView
         android:layout_height="fill_parent"
