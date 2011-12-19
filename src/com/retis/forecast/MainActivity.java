@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.retis.forecast.ForecastAdapter;
+import com.retis.forecast.ParserHelper;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -27,7 +28,7 @@ public class MainActivity extends Activity {
 	}
 	
 	private final String[] cities = { "Pisa", "Pisa", "Bologna", "Torino" };
-	private final String[] sources = { "meteo.it", "meteo.it", "meteo.it", "meteo.it" };
+	private final String[] sources = { "google.com", "google.com", "google.com", "google.com" };
 	private final String[] dates = { "30/11/11", "30/11/11", "01/12/11", "02/12/11" };
 	private final String[] times = { "11:30", "11:30", "12:30", "18:30" };
 	private final Forecasts[] forecasts = { Forecasts.SUNNY , Forecasts.CLOUDY,
@@ -57,6 +58,8 @@ public class MainActivity extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        ParserHelper test = new ParserHelper();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         StartTask();
