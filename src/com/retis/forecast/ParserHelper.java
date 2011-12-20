@@ -10,6 +10,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.*;
+
 import android.util.Log;
 
 
@@ -17,10 +18,11 @@ class ParserHelper {
 
     private final String URL = "http://www.google.com/ig/api?weather=%s&hl=en&oe=utf-8";
     private final String TAG = "ParserHelper";
-
+    private File CachePath;
     private String xml;
 
-    public ParserHelper() {
+    public ParserHelper(File CachePath) {
+    	this.CachePath=CachePath;
         try {
             getHttp( "Pisa" );
             parseHttp();
@@ -29,10 +31,12 @@ class ParserHelper {
             Log.e( TAG, "error: " + e );
         }
     }
+    
+    
 
     public void getHttp( String city ) throws IOException {
         HttpClient client = new DefaultHttpClient();
-        HttpGet method = new HttpGet( String.format(URL, city) );
+        HttpGet method = new HttpGet(String.format(URL, city) );
 
         String result; InputStream in = null;
         try {
@@ -52,6 +56,8 @@ class ParserHelper {
             byte[] b = new byte[2048]; int read;
             while ((read = in.read(b)) >= 0)
                 result += new String(b, 0, read);
+            
+            xml=result;
 
         } catch (Exception e) {
             Log.e(TAG, "Exception while retriving: "+e);
@@ -65,6 +71,8 @@ class ParserHelper {
 
     public void parseHttp() {
         try {
+     		FileOutputStream out = new FileOutputStream(CachePath); 
+    		
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser xpp = factory.newPullParser();
 
@@ -80,7 +88,10 @@ class ParserHelper {
             while ( xpp.next() != XmlPullParser.END_TAG ||
                     xpp.getName().compareToIgnoreCase( "current_conditions" ) != 0 ) {
                 if ( xpp.getAttributeCount() == 1 ) {
-                    Log.d( xpp.getName(), xpp.getAttributeValue(0) );
+                	/*Writes on cache*/
+                	String str = xpp.getName() + '\n' + xpp.getAttributeValue(0);
+                	out.write( str.getBytes());
+                	//Log.d( xpp.getName(), xpp.getAttributeValue(0) );
                 }
             }
         }
@@ -90,6 +101,6 @@ class ParserHelper {
         catch ( IOException e ) {
             Log.e(TAG, "IOException: "+e);
         }
-    }
+    } 
 
 }

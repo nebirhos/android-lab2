@@ -1,5 +1,6 @@
 package com.retis.forecast;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -58,8 +59,7 @@ public class MainActivity extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        ParserHelper test = new ParserHelper();
-
+       
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         StartTask();
@@ -102,9 +102,9 @@ public class MainActivity extends Activity {
 				handler.post(new Runnable() {
 					public void run() {
 						try {
-							/* PerformBackgroundTask performBackgroundTask = new PerformBackgroundTask();
-							 * PerformBackgroundTask this class is the class that extends AsynchTask 
-							 * performBackgroundTask.execute();*/
+							File cache_dir = new File(getCacheDir(), "cache_file");
+							ReceiveForecasts rf = new ReceiveForecasts();
+							rf.execute(cache_dir);
 						} catch (Exception e) {}
 					}
 				});
